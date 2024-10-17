@@ -15,8 +15,15 @@ class PostsController < ApplicationController
       text: params[:text],
       user_id: params[:user_id]
     )
-    @post.save
-    render :show
+      if @post.save
+        @image = Image.new(
+          post_id: @post.id, 
+          image_url: params[:image_url]
+        )
+        @image.save
+        render :show, status: :created
+      else render json: { error: @post.errors.full_messages }, status: :bad_request
+    end 
   end 
 
   def update 
