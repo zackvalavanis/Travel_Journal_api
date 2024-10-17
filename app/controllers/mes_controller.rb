@@ -2,7 +2,7 @@ class MesController < ApplicationController
 
   def index 
     if current_user
-      mes = Me.all
+      @mes = Me.all
       render :index
     else 
       render json: { error: 'unauthorized'}, status: :unauthorized
@@ -10,34 +10,35 @@ class MesController < ApplicationController
   end 
 
   def show 
-    me = Me.find_by(id: params[:id])
+    @me = Me.find_by(id: params[:id])
     render :show
   end 
 
   def create 
-    me = Me.new(
-      user_id: current_user,
+    @me = Me.new(
+      user_id: current_user.id,
       information: params[:information]
     )
-    me.save
+    @me.save
+    render :show
   end 
 
   def update 
-    me = Me.find_by(id: params[:id])
-    me.update( 
+    @me = Me.find_by(id: params[:id])
+    @me.update( 
       information: params[:information] || me.information
     )
-    if me.update 
+    if @me.update 
       render :show, status: :okay 
     else 
-      render json: {error: me.errors.full_messages}, status: :bad_request
+      render json: {error: @me.errors.full_messages}, status: :bad_request
     end
   end 
 
   def destroy 
-    me = Me.find_by(id: params[:id])
-    if me 
-      me.destroy 
+    @me = Me.find_by(id: params[:id])
+    if @me 
+      @me.destroy 
       render json: { message: 'The post has been deleted.'}, status: :ok
     else 
       render json: {messages: 'There arnt any posts from that user.'}

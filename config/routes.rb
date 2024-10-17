@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete 'posts/:id' => 'posts#destroy'
   # Users
   post '/users' => 'users#create'
-  get 'users/:id' => 'users#show'
+  get 'users/current' => 'users#show'
   #Sessions 
   post '/sessions' => 'sessions#create'
   #Images 

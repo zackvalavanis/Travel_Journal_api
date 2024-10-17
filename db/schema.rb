@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_17_171152) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_17_174549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,9 +23,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_17_171152) do
 
   create_table "mes", force: :cascade do |t|
     t.integer "user_id"
-    t.text "Information"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "information"
   end
 
   create_table "posts", force: :cascade do |t|
