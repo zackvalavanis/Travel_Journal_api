@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   post 'posts' => 'posts#create'
   delete 'posts/:id' => 'posts#destroy'
 
+  post 'users' => 'users#create'
+
 
 
 

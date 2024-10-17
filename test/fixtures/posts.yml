@@ -2,12 +2,10 @@
 
 one:
   title: MyString
-  images: MyString
   text: MyString
   user_id: 1
 
 two:
   title: MyString
-  images: MyString
   text: MyString
   user_id: 1
