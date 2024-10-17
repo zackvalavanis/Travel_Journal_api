@@ -6,6 +6,7 @@ class MesController < ApplicationController
       render :index
     else 
       render json: { error: 'unauthorized'}, status: :unauthorized
+    end
   end 
 
   def show 
