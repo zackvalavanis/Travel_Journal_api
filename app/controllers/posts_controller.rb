@@ -30,12 +30,16 @@ class PostsController < ApplicationController
       render :show, status: :okay 
     else 
       render json: {error: @post.errors.full_messages}, status: :bad_request
+    end
   end 
 
   def destroy 
     @post = Post.find_by(id: params[:id])
-    @post.destroy 
-    render json: { message: 'The post has been deleted.'}, status: :ok
+    if @post 
+      @post.destroy 
+      render json: { message: 'The post has been deleted.'}, status: :ok
+    else 
+      render json: {messages: 'There arnt any posts from that user.'}
+    end 
   end 
-
 end
