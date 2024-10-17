@@ -11,20 +11,18 @@ Rails.application.routes.draw do
   post 'posts' => 'posts#create'
   delete 'posts/:id' => 'posts#destroy'
   # Users
-  post 'users' => 'users#create'
+  post '/users' => 'users#create'
+  get 'users/:id' => 'users#show'
   #Sessions 
-  post 'sessions' => 'sessions#create'
+  post '/sessions' => 'sessions#create'
   #Images 
-  post 'images' => 'images#create'
-
-
-
-
-
-
-
-
-
+  post '/images' => 'images#create'
+  #Me
+  get 'mes' => 'mes#index'
+  get '/mes' => 'mes#show'
+  patch '/mes/:id' => 'mes#update'
+  post '/mes' => 'mes#create'
+  delete '/mes/:id' => "mes#destroy"
 
 
 
