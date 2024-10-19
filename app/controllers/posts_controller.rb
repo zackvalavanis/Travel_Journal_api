@@ -33,8 +33,8 @@ class PostsController < ApplicationController
       text: params[:text] || @post.text,
       user_id: params[:user_id] || @post.user_id
     )
-    if @post.update 
-      render :show, status: :okay 
+    if @post.save
+      render :show, status: :ok 
     else 
       render json: {error: @post.errors.full_messages}, status: :bad_request
     end
