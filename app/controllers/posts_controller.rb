@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
   def index 
-    # if current_user
-      @posts = Post.all
+    if current_user
+      @posts = Post.where(user_id: current_user.id)
       render :index
-    # else 
-    #   render json: { error: 'Unauthorized'}, status: :unauthorized
-    # end
+    else 
+      render json: { error: 'Unauthorized'}, status: :unauthorized
+    end
   end 
 
   def show 
