@@ -1,12 +1,24 @@
 class PostsController < ApplicationController
   def index 
     if current_user
-      @posts = Post.where(user_id: current_user.id)
-      render :index
+      page = params[:page].to_i > 0 ? params[:page].to_i : 1
+      limit = params[:limit].to_i > 0 ? params[:limit].to_i : 10
+      offset = (page - 1) * limit
+  
+      @posts = Post.includes(:images).where(user_id: current_user.id).limit(limit).offset(offset)
+      total_posts = Post.where(user_id: current_user.id).count
+  
+      # Render posts along with images URLs
+      render json: {
+        posts: @posts.as_json(include: { images: { only: [:image_url] } }),
+        totalPosts: total_posts
+      }
     else 
-      render json: { error: 'Unauthorized'}, status: :unauthorized
+      render json: { error: 'Unauthorized' }, status: :unauthorized
     end
-  end 
+  end
+  
+  
 
   def show 
     @post = Post.find_by(id: params[:id])
